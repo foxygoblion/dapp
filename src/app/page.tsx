@@ -5,7 +5,7 @@ import { useAccount, useContractRead, useContractWrite, useWaitForTransaction } 
 import YDDShowABI from '../contracts/YDDShow.json'
 
 // 合约地址
-const CONTRACT_ADDRESS = '0xA109Ff0cBF35f3fDf21cD0eEc8a32DE6d6607d2b'
+const CONTRACT_ADDRESS = '0x87a84EBa190912a9015a2e74056c5ceE28D807B0'
 
 // 主页组件
 export default function Home() {
@@ -13,6 +13,7 @@ export default function Home() {
   const [age, setAge] = useState<string>('')
   const [currentAge, setCurrentAge] = useState<number | null>(null)
   const [isValidAge, setIsValidAge] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   // 获取钱包账户信息
   const { address, isConnected } = useAccount()
@@ -22,6 +23,7 @@ export default function Home() {
     address: CONTRACT_ADDRESS,
     abi: YDDShowABI.abi,
     functionName: 'getAge',
+    watch: true, // 自动监听变化
   })
 
   // 写入合约方法
@@ -32,25 +34,53 @@ export default function Home() {
   })
 
   // 等待交易完成
-  const { isLoading: isWritePending } = useWaitForTransaction({
+  const { isLoading: isWritePending, isSuccess } = useWaitForTransaction({
     hash: writeData?.hash,
+    onSuccess: () => {
+      // 交易成功后刷新年龄显示
+      refetch()
+      // 清除错误信息
+      setError(null)
+    },
+    onError: (error) => {
+      setError('交易失败，请重试')
+      console.error('Transaction error:', error)
+    },
   })
 
   // 设置年龄
   const handleSetAge = async () => {
-    if (!age) return
+    setError(null)
+    if (!age) {
+      setError('*请输入年龄')
+      return
+    }
+    
+    const ageNum = parseInt(age)
+    if (isNaN(ageNum) || ageNum <= 0 || ageNum >= 150) {
+      setError('*请输入普通碳基人类的年龄')
+      return
+    }
+
+    if (!writeContract) {
+      setError('*合约写入方法未初始化，请确保您已连接到 Sepolia 测试网')
+      return
+    }
+
     try {
       writeContract({
-        args: [parseInt(age)],
+        args: [ageNum],
       })
       setAge('')
     } catch (error) {
       console.error('Error setting age:', error)
+      setError('*设置年龄失败，请确保您已连接到 Sepolia 测试网并拥有足够的测试币')
     }
   }
 
   // 获取年龄
   const handleGetAge = async () => {
+    setError(null)
     try {
       await refetch()
       const ageValue = Number(contractAge)
@@ -65,6 +95,7 @@ export default function Home() {
       console.error('Error getting age:', error)
       setIsValidAge(false)
       setCurrentAge(null)
+      setError('获取年龄失败，请重试')
     }
   }
 
@@ -88,6 +119,20 @@ export default function Home() {
         {/* 合约交互 */}
         <div className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-2xl font-bold mb-4">合约交互</h2>
+          
+          {/* 错误提示 */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+              {error}
+            </div>
+          )}
+
+          {/* 成功提示 */}
+          {isSuccess && (
+            <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-lg">
+              操作成功！
+            </div>
+          )}
           
           {/* 设置年龄 */}
           <div className="mb-6">
@@ -127,7 +172,7 @@ export default function Home() {
                 <span className="text-lg">当前年龄：{currentAge}</span>
               ) : (
                 currentAge === null && !isValidAge && (
-                  <span className="text-lg text-gray-500">sorry，没有找到该数据= =</span>
+                  <span className="text-lg text-gray-500">sorry，没有找到该数据= =，可能是该合约还没有设置年龄，或者出错了，请联系工作人员，虽然联系了也没用😁</span>
                 )
               )}
             </div>

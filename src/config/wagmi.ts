@@ -1,6 +1,7 @@
 // wagmi 配置文件
 import { configureChains, createConfig } from 'wagmi'
-import { mainnet, sepolia, goerli } from 'wagmi/chains'
+import { mainnet, sepolia } from 'wagmi/chains'
+import { infuraProvider } from 'wagmi/providers/infura'
 import { publicProvider } from 'wagmi/providers/public'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
@@ -8,8 +9,11 @@ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 
 // 配置链和提供者
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [mainnet, sepolia, goerli],
-  [publicProvider()]
+  [sepolia, mainnet], // 将 Sepolia 放在第一位，使其成为默认网络
+  [
+    infuraProvider({ apiKey: '55d47ed603074ad8b85722d5a4223111' }), // 使用 Infura 提供者
+    publicProvider(), // 保留公共提供者作为备用
+  ]
 )
 
 // 创建 wagmi 配置
