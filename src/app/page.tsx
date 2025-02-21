@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useAccount, useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi'
 import YDDShowABI from '../contracts/YDDShow.json'
 import { useStatus } from '@/context/StatusContext'
-import { parseEther } from 'viem'
 
 // 合约地址
 const CONTRACT_ADDRESS = '0x87a84EBa190912a9015a2e74056c5ceE28D807B0'
