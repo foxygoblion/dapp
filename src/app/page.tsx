@@ -89,6 +89,7 @@ export default function Home() {
       })
       setAge('')
     } catch (error) {
+      console.error('Age validation error:', error)
       setError('*请输入有效的年龄数值')
       return
     }
