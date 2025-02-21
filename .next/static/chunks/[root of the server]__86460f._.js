@@ -56,7 +56,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$
 ;
 ;
 // 配置链和提供者
-const { chains, publicClient, webSocketPublicClient } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$wagmi$2b$core$40$1$2e$4$2e$12_$40$types$2b$react$40$19$2e$0$2e$10_react$40$19$2e$0$2e$0_typescript$40$5$2e$7$2e$3_viem$40$1$2e$21$2e$4_typescript$40$5$2e$7$2e$3_$2f$node_modules$2f40$wagmi$2f$core$2f$dist$2f$chunk$2d$TSH6VVF4$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["configureChains"])([
+const { chains, publicClient } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$wagmi$2b$core$40$1$2e$4$2e$12_$40$types$2b$react$40$19$2e$0$2e$10_react$40$19$2e$0$2e$0_typescript$40$5$2e$7$2e$3_viem$40$1$2e$21$2e$4_typescript$40$5$2e$7$2e$3_$2f$node_modules$2f40$wagmi$2f$core$2f$dist$2f$chunk$2d$TSH6VVF4$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["configureChains"])([
     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$viem$40$1$2e$21$2e$4_typescript$40$5$2e$7$2e$3$2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$sepolia$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["sepolia"],
     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$viem$40$1$2e$21$2e$4_typescript$40$5$2e$7$2e$3$2f$node_modules$2f$viem$2f$_esm$2f$chains$2f$definitions$2f$mainnet$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mainnet"]
 ], [
@@ -84,8 +84,7 @@ const config = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$
             }
         })
     ],
-    publicClient,
-    webSocketPublicClient
+    publicClient
 });
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);
@@ -198,7 +197,7 @@ function Navbar() {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$1$2e$7_$40$babel$2b$core$40$7$2e$26$2e$9_react$2d$dom$40$19$2e$0$2e$0_react$40$19$2e$0$2e$0_$5f$react$40$19$2e$0$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$1$2e$7_$40$babel$2b$core$40$7$2e$26$2e$9_react$2d$dom$40$19$2e$0$2e$0_react$40$19$2e$0$2e$0_$5f$react$40$19$2e$0$2e$0$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             href: "/",
                             className: "hover:text-gray-300",
-                            children: "主页"
+                            children: "页面1"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Navbar.tsx",
                             lineNumber: 40,
@@ -207,7 +206,7 @@ function Navbar() {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$1$2e$7_$40$babel$2b$core$40$7$2e$26$2e$9_react$2d$dom$40$19$2e$0$2e$0_react$40$19$2e$0$2e$0_$5f$react$40$19$2e$0$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$1$2e$7_$40$babel$2b$core$40$7$2e$26$2e$9_react$2d$dom$40$19$2e$0$2e$0_react$40$19$2e$0$2e$0_$5f$react$40$19$2e$0$2e$0$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             href: "/not_found",
                             className: "hover:text-gray-300",
-                            children: "未找到"
+                            children: "页面2"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Navbar.tsx",
                             lineNumber: 43,

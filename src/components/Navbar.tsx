@@ -38,10 +38,10 @@ export default function Navbar() {
         {/* 左侧导航链接 */}
         <div className="flex gap-4">
           <Link href="/" className="hover:text-gray-300">
-            主页
+            页面1
           </Link>
           <Link href="/not_found" className="hover:text-gray-300">
-            未找到
+            页面2
           </Link>
         </div>
 

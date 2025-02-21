@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useAccount, useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi'
 import YDDShowABI from '../contracts/YDDShow.json'
 import { useStatus } from '@/context/StatusContext'
+import { parseEther } from 'viem'
 
 // 合约地址
 const CONTRACT_ADDRESS = '0x87a84EBa190912a9015a2e74056c5ceE28D807B0'
@@ -33,6 +34,15 @@ export default function Home() {
     address: CONTRACT_ADDRESS,
     abi: YDDShowABI.abi,
     functionName: 'setAge',
+    onError: (error) => {
+      console.error('Contract write error:', error)
+      if (error.message.includes('User rejected the request') || error.message.includes('User denied transaction signature')) {
+        setError('*用户取消操作')
+      } else {
+        setError('*设置年龄失败，请确保您已连接到 Sepolia 测试网并拥有足够的测试币')
+      }
+      setStatus('就绪')
+    }
   })
 
   // 等待交易完成
@@ -62,27 +72,26 @@ export default function Home() {
       return
     }
     
-    const ageNum = parseInt(age)
-    if (isNaN(ageNum) || ageNum <= 0 || ageNum >= 150) {
-      setError('*请输入普通碳基人类的年龄')
-      return
-    }
-
-    if (!writeContract) {
-      setError('*合约写入方法未初始化，请确保您已连接到 Sepolia 测试网')
-      return
-    }
-
     try {
+      const ageNum = BigInt(age)
+      if (ageNum <= 0n || ageNum >= 150n) {
+        setError('*请输入普通碳基人类的年龄')
+        return
+      }
+
+      if (!writeContract) {
+        setError('*合约写入方法未初始化，请确保您已连接到 Sepolia 测试网')
+        return
+      }
+
       setStatus('设置中...')
       writeContract({
         args: [ageNum],
       })
       setAge('')
     } catch (error) {
-      console.error('Error setting age:', error)
-      setError('*设置年龄失败，请确保您已连接到 Sepolia 测试网并拥有足够的测试币')
-      setStatus('就绪')
+      setError('*请输入有效的年龄数值')
+      return
     }
   }
 
@@ -92,8 +101,8 @@ export default function Home() {
     try {
       setStatus('获取中...')
       await refetch()
-      const ageValue = Number(contractAge)
-      if (isNaN(ageValue) || ageValue <= 0) {
+      const ageValue = contractAge ? Number(contractAge) : null
+      if (ageValue === null || ageValue <= 0) {
         setIsValidAge(false)
         setCurrentAge(null)
       } else {

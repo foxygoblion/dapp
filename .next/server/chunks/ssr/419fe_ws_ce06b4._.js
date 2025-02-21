@@ -105,7 +105,11 @@ const { EMPTY_BUFFER } = __turbopack_require__("[project]/node_modules/.pnpm/ws@
     return buf;
 }
 try {
-    const bufferUtil = __turbopack_require__("[project]/node_modules/.pnpm/bufferutil@4.0.9/node_modules/bufferutil/index.js [app-ssr] (ecmascript)");
+    const bufferUtil = (()=>{
+        const e = new Error("Cannot find module 'bufferutil'");
+        e.code = 'MODULE_NOT_FOUND';
+        throw e;
+    })();
     const bu = bufferUtil.BufferUtil || bufferUtil;
     module.exports = {
         concat,
@@ -626,7 +630,11 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
     return true;
 }
 try {
-    let isValidUTF8 = __turbopack_require__("[project]/node_modules/.pnpm/utf-8-validate@5.0.10/node_modules/utf-8-validate/index.js [app-ssr] (ecmascript)");
+    let isValidUTF8 = (()=>{
+        const e = new Error("Cannot find module 'utf-8-validate'");
+        e.code = 'MODULE_NOT_FOUND';
+        throw e;
+    })();
     /* istanbul ignore if */ if (typeof isValidUTF8 === 'object') {
         isValidUTF8 = isValidUTF8.Validation.isValidUTF8; // utf-8-validate@<3.0.0
     }
