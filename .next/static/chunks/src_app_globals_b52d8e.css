@@ -682,6 +682,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#__next-build-watcher {
+  display: none !important;
+}
+
+[data-nextjs-dialog-overlay], [data-nextjs-dialog], [data-nextjs-toast] {
+  display: none !important;
+}
+
 .first\:rounded-t-lg:first-child {
   border-top-left-radius: .5rem;
   border-top-right-radius: .5rem;
