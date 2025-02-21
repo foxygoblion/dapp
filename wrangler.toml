@@ -1,1 +1,5 @@
- 
+[pages]
+pages_build_output_dir = ".next/standalone"
+
+[build]
+command = "pnpm build" 
