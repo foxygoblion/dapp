@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///home/lsc/Desktop/dapp/src/app/not_found/page.tsx"],"sourcesContent":["'use client'\n\nimport Link from 'next/link'\n\n// 404 页面组件\nexport default function NotFound() {\n  return (\n    <div className=\"min-h-screen flex items-center justify-center bg-gray-100\">\n      <div className=\"text-center\">\n        <h1 className=\"text-9xl font-bold text-gray-800\">404</h1>\n        <p className=\"text-2xl text-gray-600 mb-8\">页面未找到</p>\n        <div className=\"animate-bounce\">\n          <span className=\"text-4xl\">🤔</span>\n        </div>\n        <p className=\"text-gray-500 mb-8\">\n          抱歉！您访问的页面不存在。\n        </p>\n        <Link\n          href=\"/\"\n          className=\"bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors\"\n        >\n          返回主页\n        </Link>\n      </div>\n    </div>\n  )\n} "],"names":[],"mappings":";;;;AAEA;AAFA;;;AAKe,SAAS;IACtB,qBACE,+YAAC;QAAI,WAAU;kBACb,cAAA,+YAAC;YAAI,WAAU;;8BACb,+YAAC;oBAAG,WAAU;8BAAmC;;;;;;8BACjD,+YAAC;oBAAE,WAAU;8BAA8B;;;;;;8BAC3C,+YAAC;oBAAI,WAAU;8BACb,cAAA,+YAAC;wBAAK,WAAU;kCAAW;;;;;;;;;;;8BAE7B,+YAAC;oBAAE,WAAU;8BAAqB;;;;;;8BAGlC,+YAAC,6TAAA,CAAA,UAAI;oBACH,MAAK;oBACL,WAAU;8BACX;;;;;;;;;;;;;;;;;AAMT"}},
-    {"offset": {"line": 81, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
