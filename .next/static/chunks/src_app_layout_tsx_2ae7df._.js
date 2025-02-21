@@ -15,9 +15,9 @@
     "static/chunks/3f564_framer-motion_dist_es_e1dd55._.js",
     "static/chunks/7cce3_connectkit_build_index_es_e8320a.js",
     "static/chunks/node_modules__pnpm_a2edd3._.js",
-    "static/chunks/[root of the server]__f36f4e._.js",
+    "static/chunks/[root of the server]__86460f._.js",
     "static/chunks/[root of the server]__9a168d._.css",
-    "static/chunks/node_modules__pnpm_0e4f4e._.js"
+    "static/chunks/node_modules__pnpm_364290._.js"
   ],
   "source": "dynamic"
 });

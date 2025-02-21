@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useAccount, useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi'
 import YDDShowABI from '../contracts/YDDShow.json'
+import { useStatus } from '@/context/StatusContext'
 
 // 合约地址
 const CONTRACT_ADDRESS = '0x87a84EBa190912a9015a2e74056c5ceE28D807B0'
@@ -14,6 +15,7 @@ export default function Home() {
   const [currentAge, setCurrentAge] = useState<number | null>(null)
   const [isValidAge, setIsValidAge] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const { setStatus } = useStatus()
 
   // 获取钱包账户信息
   const { address, isConnected } = useAccount()
@@ -41,10 +43,14 @@ export default function Home() {
       refetch()
       // 清除错误信息
       setError(null)
+      // 设置状态为就绪
+      setStatus('就绪')
     },
     onError: (error) => {
       setError('交易失败，请重试')
       console.error('Transaction error:', error)
+      // 设置状态为就绪
+      setStatus('就绪')
     },
   })
 
@@ -68,6 +74,7 @@ export default function Home() {
     }
 
     try {
+      setStatus('设置中...')
       writeContract({
         args: [ageNum],
       })
@@ -75,6 +82,7 @@ export default function Home() {
     } catch (error) {
       console.error('Error setting age:', error)
       setError('*设置年龄失败，请确保您已连接到 Sepolia 测试网并拥有足够的测试币')
+      setStatus('就绪')
     }
   }
 
@@ -82,6 +90,7 @@ export default function Home() {
   const handleGetAge = async () => {
     setError(null)
     try {
+      setStatus('获取中...')
       await refetch()
       const ageValue = Number(contractAge)
       if (isNaN(ageValue) || ageValue <= 0) {
@@ -91,11 +100,13 @@ export default function Home() {
         setIsValidAge(true)
         setCurrentAge(ageValue)
       }
+      setStatus('就绪')
     } catch (error) {
       console.error('Error getting age:', error)
       setIsValidAge(false)
       setCurrentAge(null)
       setError('获取年龄失败，请重试')
+      setStatus('就绪')
     }
   }
 

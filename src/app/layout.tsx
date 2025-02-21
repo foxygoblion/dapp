@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ConnectKitProvider } from 'connectkit'
 import { config } from '@/config/wagmi'
 import Navbar from '@/components/Navbar'
+import { StatusProvider } from '@/context/StatusContext'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -24,8 +25,10 @@ export default function RootLayout({
         <WagmiConfig config={config}>
           <QueryClientProvider client={queryClient}>
             <ConnectKitProvider>
-              <Navbar />
-              {children}
+              <StatusProvider>
+                <Navbar />
+                {children}
+              </StatusProvider>
             </ConnectKitProvider>
           </QueryClientProvider>
         </WagmiConfig>

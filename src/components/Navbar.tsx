@@ -4,15 +4,33 @@
 import Link from 'next/link'
 import { ConnectKitButton } from 'connectkit'
 import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useStatus } from '@/context/StatusContext'
 
 // 导航栏组件
 export default function Navbar() {
   // 获取当前网络信息
   const { chain } = useNetwork()
   // 获取切换网络方法
-  const { chains, switchNetwork } = useSwitchNetwork()
+  const { chains, switchNetwork } = useSwitchNetwork({
+    onSuccess: () => {
+      // 网络切换成功后设置状态为就绪
+      setStatus('就绪')
+    },
+    onError: () => {
+      // 网络切换失败后设置状态为就绪
+      setStatus('就绪')
+    }
+  })
   // 获取钱包连接状态
   const { isConnected } = useAccount()
+  // 获取状态
+  const { status, setStatus } = useStatus()
+
+  // 处理网络切换
+  const handleNetworkSwitch = (chainId: number) => {
+    setStatus('切换网络中...')
+    switchNetwork?.(chainId)
+  }
 
   return (
     <nav className="bg-gray-800 text-white p-4">
@@ -41,7 +59,7 @@ export default function Navbar() {
                 {chains.map((x) => (
                   <button
                     key={x.id}
-                    onClick={() => switchNetwork?.(x.id)}
+                    onClick={() => handleNetworkSwitch(x.id)}
                     className={`w-full text-left px-4 py-2 hover:bg-gray-600 first:rounded-t-lg last:rounded-b-lg ${
                       chain?.id === x.id ? 'bg-gray-600' : ''
                     }`}
@@ -55,6 +73,14 @@ export default function Navbar() {
           
           {/* 钱包连接按钮 */}
           <ConnectKitButton />
+
+          {/* 状态显示 */}
+          <div className="bg-gray-700 px-4 py-2 rounded-lg">
+            <span className="flex items-center gap-2">
+              <span className={`w-2 h-2 rounded-full ${status === '就绪' ? 'bg-green-400' : 'bg-yellow-400 animate-pulse'}`}></span>
+              {status}
+            </span>
+          </div>
         </div>
       </div>
     </nav>
