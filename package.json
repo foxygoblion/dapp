@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NEXT_DISABLE_OVERLAY=true NEXT_DISABLE_ERROR_OVERLAY=true next dev --turbopack",
-    "build": "next build && rm -rf .next/cache",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -30,6 +30,7 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
+  "packageManager": "pnpm@10.4.1",
   "pnpm": {
     "onlyBuiltDependencies": [
       "keccak",
