@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NEXT_DISABLE_OVERLAY=true NEXT_DISABLE_ERROR_OVERLAY=true next dev --turbopack",
-    "build": "NEXT_TELEMETRY_DISABLED=1 next build && rm -rf .next/cache",
+    "build": "next build && rm -rf .next/cache",
     "start": "next start",
     "lint": "next lint"
   },
