@@ -11,7 +11,7 @@ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 const { chains, publicClient } = configureChains(
   [sepolia, mainnet], // 将 Sepolia 放在第一位，使其成为默认网络
   [
-    infuraProvider({ apiKey: '55d47ed603074ad8b85722d5a4223111' }), // 使用 Infura 提供者
+    infuraProvider({ apiKey: process.env.NEXT_PUBLIC_INFURA_API_KEY as string }), // 使用环境变量
     publicProvider(), // 保留公共提供者作为备用
   ]
 )
